@@ -3,6 +3,7 @@ package goworker
 import (
 	"github.com/youtube/vitess/go/pools"
 	"github.com/cihub/seelog"
+	"golang.org/x/net/context"
 	"os"
 	"strconv"
 	"sync"
@@ -41,7 +42,7 @@ func Init() error {
 // while they wait for an available connection. Expect this
 // API to change drastically.
 func GetConn() (*RedisConn, error) {
-	resource, err := pool.Get(nil)
+	resource, err := pool.Get(context.TODO())
 
 	if err != nil {
 		return nil, err
